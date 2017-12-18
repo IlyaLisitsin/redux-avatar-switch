@@ -1,0 +1,39 @@
+span {
+    margin-top: 20px;
+    display: inline-block;
+    min-width: 80px;
+}
+
+.avatar-container {
+    width: 320px;
+    margin: 0 auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.main-avatar {
+    display: block;
+    margin: 0 auto;
+}
+
+img {
+    height: 100px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+img:hover {
+    border: 1px solid red;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
