@@ -1,4 +1,4 @@
-const popup = (state = 0, action) => {
+const popup = (state = false, action) => {
     switch(action.type) {
         case 'SHOW_POP':
             return true
