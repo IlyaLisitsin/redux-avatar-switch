@@ -9,6 +9,14 @@ span {
     margin: 0 auto;
 }
 
+.avatar-popup {
+    display: none;
+}
+
+.avatar-popup.show {
+    display: block;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -36,4 +44,8 @@ ul {
 li {
     list-style: none;
     display: inline-block;
+}
+
+.avatar-chosen {
+    cursor: not-allowed
 }
