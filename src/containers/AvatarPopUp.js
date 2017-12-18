@@ -4,7 +4,7 @@ class AvatarPopUp extends React.Component {
 
     handleClick = (id, e) => {
         if (e.target.classList.contains('avatar-chosen')) return
-        this.props.hidePop()
+        // this.props.hidePop()
         this.props.popHandler()
         this.props.setAvatar(id)
         const avatarList = document.querySelectorAll('.avatar-image img')

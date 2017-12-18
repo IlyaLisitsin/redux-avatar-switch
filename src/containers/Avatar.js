@@ -40,8 +40,8 @@ export default connect(
     }),
     {
         // changeAvatar: changeAvatar,
-        showPop: showPop,
-        hidePop: hidePop,
+        // showPop: showPop,
+        // hidePop: hidePop,
         setAvatar: setAvatar
     }
 )(Avatar)
