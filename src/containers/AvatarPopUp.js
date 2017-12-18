@@ -7,15 +7,14 @@ class AvatarPopUp extends React.Component {
         this.props.hidePop()
         this.props.popHandler()
         this.props.setAvatar(id)
-
         const avatarList = document.querySelectorAll('.avatar-image img')
-        // console.log(avatarList)
         Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
-        // // console.log('clicked', id)
-        // console.log(123123123131, avatarList[this.props.activeAvatar])
         avatarList[id].classList.add('avatar-chosen')
 
-        // document.querySelector('.avatar-chosen').addEventListener('click', () => null)
+    }
+
+    componentDidMount() {
+        Array.from(document.querySelectorAll('.avatar-image img'))[0].classList.add('avatar-chosen')
     }
 
     render() {
