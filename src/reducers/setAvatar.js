@@ -1,5 +1,4 @@
 const setAvatar = (state = 0, action) => {
-    // console.log('tick', state)
     switch(action.type) {
         case 'START':
             return false

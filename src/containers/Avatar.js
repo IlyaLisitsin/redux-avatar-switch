@@ -5,28 +5,20 @@ import  AvatarPopUp from './AvatarPopUp'
 
 class Avatar extends React.Component {
 
-    componentDidUpdate(props) {
-        console.log('updated', props)
-       
-    }
-
     popHandler = () => {
         const pop = document.querySelector('.avatar-popup')
         pop.classList.toggle('show')
     }
 
     render() {
-
-
-        console.log('activeAvatar in avaatar', this.props.activeAvatar)
-        const { picArr, activeAvatar } = this.props
+        const { picArr, activeAvatar, hidePop, setAvatar } = this.props
         
         return (
             <div className={'avatar-container'} >
-                <img className={'main-avatar'} src={picArr[this.props.activeAvatar]} onClick={this.popHandler}/>
-                <AvatarPopUp picArr={picArr}  hidePop={this.props.hidePop} 
-                                              setAvatar={this.props.setAvatar} 
-                                              popHandler={this.popHandler}
+                <img className={'main-avatar'} src={picArr[activeAvatar]} onClick={this.popHandler}/>
+                <AvatarPopUp picArr={picArr}
+                             setAvatar={setAvatar}
+                             popHandler={this.popHandler}
                 />
             </div>
         )
@@ -39,9 +31,6 @@ export default connect(
         activeAvatar: state.activeAvatar
     }),
     {
-        // changeAvatar: changeAvatar,
-        // showPop: showPop,
-        // hidePop: hidePop,
         setAvatar: setAvatar
     }
 )(Avatar)

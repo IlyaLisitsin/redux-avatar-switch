@@ -4,13 +4,18 @@ class AvatarPopUp extends React.Component {
 
     handleClick = (id, e) => {
         if (e.target.classList.contains('avatar-chosen')) return
-        // this.props.hidePop()
-        this.props.popHandler()
-        this.props.setAvatar(id)
-        const avatarList = document.querySelectorAll('.avatar-image img')
-        Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
-        avatarList[id].classList.add('avatar-chosen')
+        const spinner = document.querySelectorAll('.spinner')
+        const curSpinner  = Array.from(spinner)[id]
+        curSpinner.classList.add('show')
 
+        setTimeout(() => {
+            this.props.popHandler()
+            this.props.setAvatar(id)
+            const avatarList = document.querySelectorAll('.avatar-image img')
+            Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
+            avatarList[id].classList.add('avatar-chosen')
+            curSpinner.classList.remove('show')
+        }, 2000)
     }
 
     componentDidMount() {
@@ -19,7 +24,7 @@ class AvatarPopUp extends React.Component {
 
     render() {
 
-        const { picArr, selectedAvatarId } = this.props
+        const { picArr } = this.props
 
         return (
             <ul className={'avatar-popup'}>
@@ -27,7 +32,10 @@ class AvatarPopUp extends React.Component {
                     picArr.map((el, index) => {
                         return (
                             <li className={'avatar-image'}>
-                                <img src={el} key={index} onClick={(e) => this.handleClick(index, e)}/>
+                               <div className={'list-item'}>
+                                   <div className={'spinner'}/>
+                                   <img src={el} key={index} onClick={(e) => this.handleClick(index, e)}/>
+                               </div>
                             </li>
                         )
                     })
