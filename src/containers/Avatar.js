@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { showPop, hidePop, setAvatar } from "../actions/index";
+import { setAvatar } from "../actions/index";
 import  AvatarPopUp from './AvatarPopUp'
 
 class Avatar extends React.Component {
@@ -11,7 +11,7 @@ class Avatar extends React.Component {
     }
 
     render() {
-        const { picArr, activeAvatar, hidePop, setAvatar } = this.props
+        const { picArr, activeAvatar, setAvatar } = this.props
         
         return (
             <div className={'avatar-container'} >
