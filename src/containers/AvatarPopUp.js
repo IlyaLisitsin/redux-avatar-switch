@@ -3,19 +3,22 @@ import React from 'react'
 class AvatarPopUp extends React.Component {
 
     handleClick = (id, e) => {
-        if (e.target.classList.contains('avatar-chosen')) return
-        const spinner = document.querySelectorAll('.spinner')
-        const curSpinner  = Array.from(spinner)[id]
-        curSpinner.classList.add('show')
+        this.props.fetch(id)
+        console.log('pend', this.props.pend)
 
-        setTimeout(() => {
-            this.props.popHandler()
-            this.props.setAvatar(id)
-            const avatarList = document.querySelectorAll('.avatar-image img')
-            Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
-            avatarList[id].classList.add('avatar-chosen')
-            curSpinner.classList.remove('show')
-        }, 2000)
+        // if (e.target.classList.contains('avatar-chosen')) return
+        // const spinner = document.querySelectorAll('.spinner')
+        // const curSpinner  = Array.from(spinner)[id]
+        // curSpinner.classList.add('show')
+        //
+        // setTimeout(() => {
+        //     this.props.popHandler()
+        //     this.props.setAvatar(id)
+        //     const avatarList = document.querySelectorAll('.avatar-image img')
+        //     Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
+        //     avatarList[id].classList.add('avatar-chosen')
+        //     curSpinner.classList.remove('show')
+        // }, 2000)
     }
 
     componentDidMount() {

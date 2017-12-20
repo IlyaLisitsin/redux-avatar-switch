@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { setAvatar } from "../actions/index";
+import { setAvatar, selectAvatar, mainAction } from "../actions/index";
 import  AvatarPopUp from './AvatarPopUp'
 
 class Avatar extends React.Component {
@@ -10,15 +10,20 @@ class Avatar extends React.Component {
         pop.classList.toggle('show')
     }
 
+    componentDidMount() {
+        console.log(this.props)
+    }
+
     render() {
-        const { picArr, activeAvatar, setAvatar } = this.props
+        const { picArr, activeAvatar, fetch } = this.props
         
         return (
             <div className={'avatar-container'} >
-                <img className={'main-avatar'} src={picArr[activeAvatar]} onClick={this.popHandler}/>
+                <img className={'main-avatar'} src={picArr[activeAvatar.id]} onClick={this.popHandler}/>
                 <AvatarPopUp picArr={picArr}
-                             setAvatar={setAvatar}
+                             fetch={fetch}
                              popHandler={this.popHandler}
+                             pend={activeAvatar.isPending}
                 />
             </div>
         )
@@ -27,10 +32,9 @@ class Avatar extends React.Component {
 
 export default connect(
     state => ({
-        popup: state.popup,
         activeAvatar: state.activeAvatar
     }),
     {
-        setAvatar: setAvatar
+        fetch: mainAction
     }
 )(Avatar)
