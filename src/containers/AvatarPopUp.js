@@ -1,10 +1,15 @@
 import React from 'react'
+import { showPop, hidePop } from "../actions/index"
+import { connect } from "react-redux"
+
+
 
 class AvatarPopUp extends React.Component {
 
     handleClick = (id, e) => {
+        console.log('handle link ', this.props.pend)
         this.props.fetch(id)
-        console.log('pend', this.props.pend)
+
 
         // if (e.target.classList.contains('avatar-chosen')) return
         // const spinner = document.querySelectorAll('.spinner')
@@ -22,7 +27,7 @@ class AvatarPopUp extends React.Component {
     }
 
     componentDidMount() {
-        Array.from(document.querySelectorAll('.avatar-image img'))[0].classList.add('avatar-chosen')
+        // Array.from(document.querySelectorAll('.avatar-image img'))[0].classList.add('avatar-chosen')
     }
 
     render() {
@@ -30,7 +35,7 @@ class AvatarPopUp extends React.Component {
         const { picArr } = this.props
 
         return (
-            <ul className={'avatar-popup'}>
+            <ul className={this.props.className}>
                 {
                     picArr.map((el, index) => {
                         return (

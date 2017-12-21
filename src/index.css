@@ -27,7 +27,7 @@ img:hover {
 }
 
 .avatar-popup {
-    display: none;
+    /*display: none;*/
     width: 365px;
     background-color: #2c3033;
     padding: 10px;
