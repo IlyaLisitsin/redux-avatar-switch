@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { setAvatar, selectAvatar, mainAction, showPop, hidePop } from "../actions/index"
-import classNames from 'classnames'
+import { mainAction, showPop, hidePop } from "../actions/index"
 import  AvatarPopUp from './AvatarPopUp'
 
-class Avatar extends React.Component {
+class Avatar extends Component {
 
     popHandler = () => {
         const {togglePop, hidePop, showPop} = this.props
@@ -12,23 +11,30 @@ class Avatar extends React.Component {
         else showPop()
     }
 
-    componentDidMount() {
-        console.log('pend', this.props.activeAvatar.isPending)
-        console.log('sddsfdsfdsfsdfsdfsds', this.props)
+    renderAvatar = () => {
+        const { picArr, fetch, togglePop, activeAvatar: { animate }, activeAvatar: {id}} = this.props
+
+        if (togglePop) return (
+            <AvatarPopUp
+                className={'avatar-popup'}
+                picArr={picArr}
+                fetch={fetch}
+                animate={animate}
+                popHandler={this.popHandler}
+                disable={id}
+            />
+        )
+
+        return null
     }
 
     render() {
-        const { picArr, activeAvatar, fetch } = this.props
+        const { picArr, activeAvatar: {id} } = this.props
 
         return (
             <div className={'avatar-container'} >
-                {this.props.activeAvatar.isPending && <div>Renewing...</div>}
-                <img className={'main-avatar'} src={picArr[activeAvatar.id]} onClick={this.popHandler}/>
-                {this.props.togglePop && <AvatarPopUp className={'avatar-popup'}
-                                                      picArr={picArr}
-                                                      fetch={fetch}
-                                                      pend={activeAvatar.isPending}
-                />}
+                <img className={'main-avatar'} src={picArr[id]} onClick={this.popHandler}/>
+                {this.renderAvatar()}
             </div>
         )
     }
@@ -37,7 +43,7 @@ class Avatar extends React.Component {
 export default connect(
     state => ({
         activeAvatar: state.activeAvatar,
-        togglePop: state.togglePop
+        togglePop: state.togglePop,
     }),
     {
         fetch: mainAction,

@@ -75,10 +75,14 @@ li {
 }
 
 
-.avatar-chosen {
-    cursor: not-allowed
+.disabled img {
+    cursor: not-allowed;
 }
 
+.disabled img:hover {
+    transform: none;
+    filter: grayscale(100%);
+}
 .list-item {
     margin-right: 20px;
     position: relative;

@@ -1,48 +1,33 @@
-import React from 'react'
-import { showPop, hidePop } from "../actions/index"
-import { connect } from "react-redux"
+import React, { Component } from 'react'
+import cn from 'classnames'
 
+class AvatarPopUp extends Component {
 
-
-class AvatarPopUp extends React.Component {
-
-    handleClick = (id, e) => {
-        console.log('handle link ', this.props.pend)
-        this.props.fetch(id)
-
-
-        // if (e.target.classList.contains('avatar-chosen')) return
-        // const spinner = document.querySelectorAll('.spinner')
-        // const curSpinner  = Array.from(spinner)[id]
-        // curSpinner.classList.add('show')
-        //
-        // setTimeout(() => {
-        //     this.props.popHandler()
-        //     this.props.setAvatar(id)
-        //     const avatarList = document.querySelectorAll('.avatar-image img')
-        //     Array.from(avatarList).map(el => el.classList.remove('avatar-chosen'))
-        //     avatarList[id].classList.add('avatar-chosen')
-        //     curSpinner.classList.remove('show')
-        // }, 2000)
-    }
-
-    componentDidMount() {
-        // Array.from(document.querySelectorAll('.avatar-image img'))[0].classList.add('avatar-chosen')
+    handleClick = (index) => {
+        const { disable, fetch } = this.props
+        if (index === disable) return
+        fetch(index)
     }
 
     render() {
 
-        const { picArr } = this.props
+        const { picArr, className, animate, disable } = this.props
 
         return (
-            <ul className={this.props.className}>
+            <ul className={className}>
                 {
                     picArr.map((el, index) => {
+                        let spinnerTrig = false
+                        let disableTrig = false
+
+                        if (index === animate) spinnerTrig = true
+                        if (index === disable) disableTrig = true
+
                         return (
                             <li className={'avatar-image'}>
-                               <div className={'list-item'}>
-                                   <div className={'spinner'}/>
-                                   <img src={el} key={index} onClick={(e) => this.handleClick(index, e)}/>
+                               <div className={cn('list-item', {'disabled': disableTrig})}>
+                                   <div className={cn('spinner', {'show': spinnerTrig})}/>
+                                   <img src={el} key={index} onClick={() => this.handleClick(index)} />
                                </div>
                             </li>
                         )
