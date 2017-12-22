@@ -6,13 +6,12 @@ export const activeAvatar = (state = {
     switch(action.type) {
 
         case 'PENDING' :
-            console.log('action PENDING')
             return Object.assign({}, state, {
                 isPending: action.isPending,
                 animate: action.id,
             })
+
         case 'SET_AVATAR' :
-            console.log('action SET_AVATAR')
             return Object.assign({}, state, {
                 isPending: false,
                 animate: null,
@@ -26,10 +25,13 @@ export const activeAvatar = (state = {
 
 export const togglePop = (state = false, action) => {
     switch (action.type) {
+
         case 'SHOW_POP':
             return true
+
         case 'HIDE_POP':
             return false
+
         default:
             return state;
     }
