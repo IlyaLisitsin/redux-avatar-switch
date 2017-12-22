@@ -1,25 +1,40 @@
-import React from 'react'
-import { connect } from "react-redux";
-import { setAvatar } from "../actions/index";
+import React, { Component } from 'react'
+import { connect } from "react-redux"
+import { mainAction, showPop, hidePop } from "../actions/index"
 import  AvatarPopUp from './AvatarPopUp'
 
-class Avatar extends React.Component {
+class Avatar extends Component {
 
     popHandler = () => {
-        const pop = document.querySelector('.avatar-popup')
-        pop.classList.toggle('show')
+        const {togglePop, hidePop, showPop} = this.props
+        if (togglePop) hidePop()
+        else showPop()
+    }
+
+    renderAvatar = () => {
+        const { picArr, fetch, togglePop, activeAvatar: { animate }, activeAvatar: {id}} = this.props
+
+        if (togglePop) return (
+            <AvatarPopUp
+                className={'avatar-popup'}
+                picArr={picArr}
+                fetch={fetch}
+                animate={animate}
+                popHandler={this.popHandler}
+                disable={id}
+            />
+        )
+
+        return null
     }
 
     render() {
-        const { picArr, activeAvatar, setAvatar } = this.props
-        
+        const { picArr, activeAvatar: {id} } = this.props
+
         return (
             <div className={'avatar-container'} >
-                <img className={'main-avatar'} src={picArr[activeAvatar]} onClick={this.popHandler}/>
-                <AvatarPopUp picArr={picArr}
-                             setAvatar={setAvatar}
-                             popHandler={this.popHandler}
-                />
+                <img className={'main-avatar'} src={picArr[id]} onClick={this.popHandler}/>
+                {this.renderAvatar()}
             </div>
         )
     }
@@ -27,10 +42,12 @@ class Avatar extends React.Component {
 
 export default connect(
     state => ({
-        popup: state.popup,
-        activeAvatar: state.activeAvatar
+        activeAvatar: state.activeAvatar,
+        togglePop: state.togglePop,
     }),
     {
-        setAvatar: setAvatar
+        fetch: mainAction,
+        showPop: showPop,
+        hidePop: hidePop
     }
 )(Avatar)

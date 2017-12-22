@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import activeAvatar from './activeAvatar'
+import { activeAvatar, togglePop } from './activeAvatar'
 
 const appReducers = combineReducers({
-  activeAvatar
+  activeAvatar,
+  togglePop
 })
 
 export default appReducers;
